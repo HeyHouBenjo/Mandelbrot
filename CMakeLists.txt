@@ -15,7 +15,10 @@ find_package(Qt6 COMPONENTS
         OpenGL
         REQUIRED)
 
-add_executable(Mandelbrot main.cpp)
+file(GLOB_RECURSE SOURCE_FILES src/**.cpp)
+file(GLOB_RECURSE HEADER_FILES headers/**.h)
+add_executable(Mandelbrot ${SOURCE_FILES} ${HEADER_FILES})
+
 target_link_libraries(Mandelbrot
         Qt::Core
         Qt::Gui
