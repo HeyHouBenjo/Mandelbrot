@@ -6,9 +6,9 @@
 class MainWindow : public QWidget {
 	Q_OBJECT
 public:
-	explicit MainWindow(QWidget *parent = nullptr);
-public slots:
-	void sizeChanged(int newValue);
+	explicit MainWindow();
+private slots:
+	void sizeSliderChanged(int);
 private:
 	void buildUI();
 

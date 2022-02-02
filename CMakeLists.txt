@@ -12,7 +12,7 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
-        OpenGL
+        OpenGLWidgets
         REQUIRED)
 
 file(GLOB_RECURSE SOURCE_FILES src/**.cpp)
@@ -23,5 +23,5 @@ target_link_libraries(Mandelbrot
         Qt::Core
         Qt::Gui
         Qt::Widgets
-        Qt::OpenGL
+        Qt::OpenGLWidgets
         )
