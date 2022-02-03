@@ -2,7 +2,6 @@
 out vec4 pixColor;
 
 uniform int iterationCount;
-uniform float divergeThreshold;
 
 in vec2 complexPos;
 
@@ -21,7 +20,7 @@ void main(){
     vec2 z;
     float stepsNeeded = 0;
     while (stepsNeeded < iterationCount && length(z) < 2){
-        z = mul(z, z) + complexPos;
+        z = square(z) + complexPos;
         ++stepsNeeded;
     }
 
