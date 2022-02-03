@@ -16,7 +16,7 @@ private:
 	int iterations = 0;
 	double scale = 1;
 	QVector2D translation;
-	void setShaderValues(QOpenGLShaderProgram&);
+	void setShaderValues(QOpenGLShaderProgram&) const;
 };
 
 

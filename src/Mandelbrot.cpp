@@ -13,7 +13,7 @@ void Mandelbrot::draw(GLuint vao, QOpenGLShaderProgram& shader) {
 	glBindVertexArray(0);
 }
 
-void Mandelbrot::setShaderValues(QOpenGLShaderProgram &shader) {
+void Mandelbrot::setShaderValues(QOpenGLShaderProgram &shader) const {
 	shader.setUniformValue("origin", QVector2D(-1, 1));
 	shader.setUniformValue("size", QVector2D(2, 2));
 	shader.setUniformValue("iterationCount", iterations);
