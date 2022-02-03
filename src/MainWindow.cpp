@@ -11,9 +11,10 @@ MainWindow::MainWindow() {
 void MainWindow::buildUI() {
 	resize(700, 700);
 
-	auto iterationsCaption = new QLabel("Iteration count:");
+	auto iterationsCaption = new QLabel("Iteration count: ");
 	auto iterationsLabel = new QLabel;
-	//iterationsLabel->setAlignment(Qt::AlignRight);
+	iterationsLabel->setFixedWidth(50);
+	iterationsLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
 	auto iterationsSlider = new QSlider(Qt::Horizontal);
 	iterationsSlider->setRange(5, 300);
 	connect(
