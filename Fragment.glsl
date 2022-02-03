@@ -48,7 +48,7 @@ vec2 m(in vec2 c){
 
 void main(){
 
-    vec2 z;
+    vec2 z = vec2(0, 0);
     int steps = 0;
     while (steps < iterationCount && length(z) <= 2){
         z = m(z);
