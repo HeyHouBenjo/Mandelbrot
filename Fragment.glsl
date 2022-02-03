@@ -6,8 +6,8 @@ uniform int iterationCount;
 in vec2 complexPos;
 
 vec3 getColor(in float value){
-    vec3 red = vec3(0.5, 0, 0);
-    vec3 blue = vec3(0, 0, 0.5);
+    vec3 red = vec3(1, 0, 0);
+    vec3 blue = vec3(0, 0, 1);
     return value * red + (1 - value) * blue;
 }
 
