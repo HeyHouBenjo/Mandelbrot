@@ -17,7 +17,7 @@ vec2 square(in vec2 c){
 
 void main(){
 
-    vec2 z;
+    vec2 z = vec2(0, 0);
     float stepsNeeded = 0;
     while (stepsNeeded < iterationCount && length(z) < 2){
         z = square(z) + complexPos;
