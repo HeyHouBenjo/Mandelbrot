@@ -5,9 +5,12 @@
 #include <QWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
+#include "Mandelbrot.h"
 
-class OutputWidget : public QOpenGLWidget, public QOpenGLFunctions {
+class OutputWidget : public QOpenGLWidget, protected QOpenGLFunctions {
 	Q_OBJECT
+public:
+	explicit OutputWidget(QWidget* parent): QOpenGLWidget(parent) {};
 private:
 	void initializeGL() override;
 	void paintGL() override;
@@ -18,6 +21,8 @@ private:
 	void mousePressEvent(QMouseEvent*) override;
 	void mouseReleaseEvent(QMouseEvent*) override;
 	void keyPressEvent(QKeyEvent*) override;
+
+	Mandelbrot mandelbrot;
 };
 
 

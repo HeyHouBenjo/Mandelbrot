@@ -12,7 +12,7 @@ private slots:
 private:
 	void buildUI();
 
-	OutputWidget* outputWidget = new OutputWidget;
+	OutputWidget* outputWidget = new OutputWidget(this);
 };
 
 
