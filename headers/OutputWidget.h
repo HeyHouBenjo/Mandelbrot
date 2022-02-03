@@ -6,7 +6,7 @@
 #include <QOpenGLWidget>
 #include "Mandelbrot.h"
 
-class OutputWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core {
+class OutputWidget : public QOpenGLWidget, protected QOpenGLExtraFunctions {
 	Q_OBJECT
 public:
 	explicit OutputWidget(QWidget* parent): QOpenGLWidget(parent) {}

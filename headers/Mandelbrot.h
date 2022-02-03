@@ -2,9 +2,9 @@
 #pragma once
 
 #include <QVector2D>
-#include <QOpenGLFunctions_3_3_Core>
+#include <QOpenGLExtraFunctions>
 
-class Mandelbrot : public QObject, protected QOpenGLFunctions_3_3_Core {
+class Mandelbrot : public QObject, protected QOpenGLExtraFunctions {
 Q_OBJECT
 public:
 	void init();
