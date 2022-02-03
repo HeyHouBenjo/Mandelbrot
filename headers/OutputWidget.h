@@ -6,7 +6,7 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
 
-class OutputWidget : public QOpenGLWidget, protected QOpenGLFunctions {
+class OutputWidget : public QOpenGLWidget, public QOpenGLFunctions {
 	Q_OBJECT
 private:
 	void initializeGL() override;

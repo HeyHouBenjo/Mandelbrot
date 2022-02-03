@@ -8,6 +8,7 @@ MainWindow::MainWindow() {
 }
 
 void MainWindow::buildUI() {
+	resize(700, 700);
 
 	auto sizeSlider = new QSlider(Qt::Horizontal);
 	sizeSlider->setRange(100, 800);
