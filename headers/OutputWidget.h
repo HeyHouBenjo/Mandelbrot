@@ -1,9 +1,11 @@
-
 #pragma once
 
 
 #include <QWidget>
 #include <QOpenGLWidget>
+#include <QMouseEvent>
+#include <QWheelEvent>
+#include <QKeyEvent>
 #include "Mandelbrot.h"
 
 class OutputWidget : public QOpenGLWidget, protected QOpenGLExtraFunctions {
@@ -21,6 +23,8 @@ private:
 	void mousePressEvent(QMouseEvent*) override;
 	void mouseReleaseEvent(QMouseEvent*) override;
 	void keyPressEvent(QKeyEvent*) override;
+
+	QPoint mousePos;
 
 	void initShader();
 	static std::vector<QVector2D> genVertices();

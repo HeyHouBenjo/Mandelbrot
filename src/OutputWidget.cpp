@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <QResource>
 #include "../headers/OutputWidget.h"
@@ -16,18 +15,15 @@ void OutputWidget::initializeGL() {
 
 	vao = createVAO();
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 void OutputWidget::paintGL() {
-	glClear(GL_COLOR_BUFFER_BIT);
-	getMandelbrot()->draw(vao, vertCount, shader);
+	getMandelbrot()->draw(vao, shader);
 }
 
 void OutputWidget::resizeGL(int w, int h) {
-	//glViewport(0, 0, w, h);
+
 }
 
 GLuint OutputWidget::createVAO() {
@@ -74,7 +70,8 @@ void OutputWidget::wheelEvent(QWheelEvent *e) {
 }
 
 void OutputWidget::mouseMoveEvent(QMouseEvent *e) {
-
+	QPoint newMousePos = e->pos();
+	QPoint diff = newMousePos - mousePos;
 }
 
 void OutputWidget::mousePressEvent(QMouseEvent *e) {
