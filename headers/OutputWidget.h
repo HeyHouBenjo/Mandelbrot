@@ -10,7 +10,8 @@
 class OutputWidget : public QOpenGLWidget, protected QOpenGLFunctions {
 	Q_OBJECT
 public:
-	explicit OutputWidget(QWidget* parent): QOpenGLWidget(parent) {};
+	explicit OutputWidget(QWidget* parent): QOpenGLWidget(parent) {}
+	Mandelbrot* getMandelbrot() {return &mandelbrot;}
 private:
 	void initializeGL() override;
 	void paintGL() override;

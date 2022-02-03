@@ -8,7 +8,7 @@ class MainWindow : public QWidget {
 public:
 	explicit MainWindow();
 private slots:
-	void sizeSliderChanged(int);
+	void iterationsSliderChanged(int);
 private:
 	void buildUI();
 

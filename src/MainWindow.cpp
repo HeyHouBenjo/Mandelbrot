@@ -10,20 +10,32 @@ MainWindow::MainWindow() {
 void MainWindow::buildUI() {
 	resize(700, 700);
 
-	auto sizeSlider = new QSlider(Qt::Horizontal);
-	sizeSlider->setRange(100, 800);
-	QSlider::connect(sizeSlider, &QSlider::valueChanged, this, &MainWindow::sizeSliderChanged);
-	sizeSlider->setValue(500);
+	auto iterationsSlider = new QSlider(Qt::Horizontal);
+	iterationsSlider->setRange(5, 300);
+	QSlider::connect(
+			iterationsSlider,
+			&QSlider::valueChanged,
+			this->outputWidget->getMandelbrot(),
+			&Mandelbrot::setIterations
+			);
+	QSlider::connect(
+			iterationsSlider,
+			&QSlider::valueChanged,
+			this,
+			&MainWindow::iterationsSliderChanged
+			);
+
+	iterationsSlider->setValue(100);
 
 	auto controls = new QGridLayout;
-	controls->addWidget(sizeSlider);
+	controls->addWidget(iterationsSlider);
 
 	auto lyt = new QVBoxLayout(this);
 	lyt->addWidget(outputWidget);
 	lyt->addLayout(controls);
 }
 
-//TODO Handle size change
-void MainWindow::sizeSliderChanged(int newValue) {
-
+void MainWindow::iterationsSliderChanged(int newValue) {
+	//TODO update text label
+	update();
 }

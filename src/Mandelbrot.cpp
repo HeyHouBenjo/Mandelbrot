@@ -1,8 +1,10 @@
 
 #include "../headers/Mandelbrot.h"
 
-Mandelbrot::Mandelbrot() {
+void Mandelbrot::init() {
 	initializeOpenGLFunctions();
+
+
 }
 
 void Mandelbrot::draw() {
@@ -10,5 +12,11 @@ void Mandelbrot::draw() {
 }
 
 void Mandelbrot::zoom(double delta) {
-
+	scale *= delta;
 }
+
+void Mandelbrot::setIterations(int value) {
+	iterations = value;
+}
+
+
