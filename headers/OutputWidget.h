@@ -22,6 +22,13 @@ private:
 	void mouseReleaseEvent(QMouseEvent*) override;
 	void keyPressEvent(QKeyEvent*) override;
 
+	void initShader();
+	static std::vector<QVector2D> genVertices();
+	GLuint createVAO();
+	GLuint vao;
+	int vertCount;
+	QOpenGLShaderProgram shader;
+
 	Mandelbrot mandelbrot;
 };
 
