@@ -17,7 +17,6 @@ void Mandelbrot::setShaderValues(QOpenGLShaderProgram &shader) {
 	shader.setUniformValue("origin", QVector2D(-1, 1));
 	shader.setUniformValue("size", QVector2D(2, 2));
 	shader.setUniformValue("iterationCount", iterations);
-	shader.setUniformValue("divergeThreshold", divergeThreshold);
 }
 
 void Mandelbrot::zoom(double delta) {
@@ -26,10 +25,6 @@ void Mandelbrot::zoom(double delta) {
 
 void Mandelbrot::setIterations(int value) {
 	iterations = value;
-}
-
-void Mandelbrot::updateLimit(int value) {
-	divergeThreshold = float(value) / 100;
 }
 
 

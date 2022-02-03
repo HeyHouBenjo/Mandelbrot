@@ -12,10 +12,8 @@ public:
 	void zoom(double);
 public slots:
 	void setIterations(int);
-	void updateLimit(int);
 private:
 	int iterations = 0;
-	float divergeThreshold = 0;
 	double scale = 1;
 	QVector2D translation;
 	void setShaderValues(QOpenGLShaderProgram&);
