@@ -23,7 +23,7 @@ void OutputWidget::paintGL() {
 }
 
 void OutputWidget::resizeGL(int w, int h) {
-
+	
 }
 
 GLuint OutputWidget::createVAO() {
