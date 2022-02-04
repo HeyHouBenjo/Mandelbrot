@@ -73,14 +73,10 @@ QVector2D relative(QPoint p, QSize s){
 
 void OutputWidget::wheelEvent(QWheelEvent *e) {
 	QPoint pos = e->position().toPoint();
-	float modifier = 1;
-	if (e->angleDelta().y() > 0)
-		modifier /= 1.1;
-	else
-		modifier *= 1.1;
+	int direction = e->angleDelta().y() > 0 ? 1 : -1;
 	QVector2D relativePos = relative(pos, size());
 	relativePos.setY(1 - relativePos.y());
-	getMandelbrot()->zoomRelative(modifier, relativePos);
+	getMandelbrot()->zoomRelative(direction, relativePos);
 	update();
 }
 
