@@ -16,7 +16,7 @@ void MainWindow::buildUI() {
 	iterationsLabel->setFixedWidth(50);
 	iterationsLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
 	auto iterationsSlider = new QSlider(Qt::Horizontal);
-	iterationsSlider->setRange(5, 300);
+	iterationsSlider->setRange(5, 1000);
 	connect(
 			iterationsSlider,
 			&QSlider::valueChanged,
