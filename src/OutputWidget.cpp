@@ -72,12 +72,15 @@ QVector2D relative(QPoint p, QSize s){
 }
 
 void OutputWidget::wheelEvent(QWheelEvent *e) {
-	double modifier = 1;
+	QPoint pos = e->position().toPoint();
+	float modifier = 1;
 	if (e->angleDelta().y() > 0)
-		modifier *= 1.1;
-	else
 		modifier /= 1.1;
-	getMandelbrot()->zoomRelative(modifier, relative(mousePos, size()));
+	else
+		modifier *= 1.1;
+	QVector2D relativePos = relative(pos, size());
+	relativePos.setY(1 - relativePos.y());
+	getMandelbrot()->zoomRelative(modifier, relativePos);
 	update();
 }
 
@@ -85,7 +88,9 @@ void OutputWidget::mouseMoveEvent(QMouseEvent *e) {
 	QPoint newMousePos = e->pos();
 	QPoint diff = newMousePos - mousePos;
 	mousePos = newMousePos;
-	getMandelbrot()->translateRelative(relative(diff, size()));
+	QVector2D relativeDiff = relative(diff, size());
+	relativeDiff.setY(-relativeDiff.y());
+	getMandelbrot()->translateRelative(relativeDiff);
 	update();
 }
 

@@ -8,7 +8,6 @@ out vec2 complexPos;
 
 void main(){
     vec2 offset = (pos + 1) / 2 * size;
-    offset.y *= -1;
     complexPos = origin + offset;
-    gl_Position = vec4(pos.xy, 0.0, 1.);
+    gl_Position = vec4(pos.xy, 0, 1);
 }
