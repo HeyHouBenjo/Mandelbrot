@@ -13,6 +13,7 @@ class OutputWidget : public QOpenGLWidget, protected QOpenGLExtraFunctions {
 public:
 	explicit OutputWidget(QWidget* parent): QOpenGLWidget(parent) {}
 	Mandelbrot& getMandelbrot() {return mandelbrot;}
+	void saveToImage(const std::function<void(void)>&, const std::function<void(bool)>&);
 private:
 	void initializeGL() override;
 	void paintGL() override;
@@ -27,11 +28,7 @@ private:
 	QPoint mousePos;
 	QSize oldSize {0, 0};
 
-	void initShader();
-	static std::vector<QVector2D> genVertices();
 	GLuint createVAO();
-	GLuint vao {};
-	QOpenGLShaderProgram shader;
 
 	Mandelbrot mandelbrot;
 };

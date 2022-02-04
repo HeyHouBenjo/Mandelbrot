@@ -1,19 +1,31 @@
+#include <QImage>
+#include <iostream>
+#include <QOpenGLWidget>
 #include "../headers/Mandelbrot.h"
 
-void Mandelbrot::init() {
+void Mandelbrot::init(GLuint vaoId) {
 	initializeOpenGLFunctions();
+	vao = vaoId;
 }
 
-void Mandelbrot::draw(GLuint vao, QOpenGLShaderProgram& shader) {
+void Mandelbrot::draw() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	shader.bind();
-	setShaderValues(shader);
+	setShaderValues();
 	glBindVertexArray(vao);
-	glDrawArrays(GL_QUADS, 0, 4);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
 }
 
-void Mandelbrot::setShaderValues(QOpenGLShaderProgram &shader) const {
+bool Mandelbrot::initShader() {
+	if (!shader.addShaderFromSourceFile(QOpenGLShader::Vertex, "Vertex.glsl")) return false;
+	if (!shader.addShaderFromSourceFile(QOpenGLShader::Fragment, "Fragment.glsl")) return false;
+	if (!shader.link()) return false;
+	if (!shader.bind()) return false;
+	return true;
+}
+
+void Mandelbrot::setShaderValues() {
 	shader.setUniformValue("origin", origin);
 	shader.setUniformValue("size", size);
 	shader.setUniformValue("iterationCount", iterations);

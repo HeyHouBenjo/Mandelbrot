@@ -2,6 +2,7 @@
 #include <QSlider>
 #include <QLabel>
 #include <iostream>
+#include <QPushButton>
 #include "../headers/MainWindow.h"
 
 MainWindow::MainWindow(): outputWidget(OutputWidget(this)) {
@@ -28,10 +29,29 @@ void MainWindow::buildUI() {
 			});
 	iterationsSlider->setValue(100);
 
+	auto saveInfo = new QLabel;
+	auto saveButton = new QPushButton("Save high resolution image");
+	connect(
+			saveButton,
+			&QPushButton::clicked,
+			this,
+			[this, saveInfo](){
+				saveInfo->setText("Receiving image...");
+				update();
+				this->outputWidget.saveToImage([saveInfo](){
+					saveInfo->setText("Saving...");
+				}, [saveInfo](bool success){
+					QString result = success ? "Success" : "Failure";
+					saveInfo->setText(result);
+				});
+			});
+
 	auto controls = new QGridLayout;
 	controls->addWidget(iterationsCaption, 1, 1);
 	controls->addWidget(iterationsLabel, 1, 2);
 	controls->addWidget(iterationsSlider, 1, 3);
+	controls->addWidget(saveInfo, 2, 1, 1, 2);
+	controls->addWidget(saveButton, 2, 3, 1, 1);
 
 	auto lyt = new QVBoxLayout(this);
 	lyt->addWidget(&outputWidget);
