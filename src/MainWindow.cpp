@@ -22,7 +22,7 @@ void MainWindow::buildUI() {
 			&QSlider::valueChanged,
 			this,
 			[iterationsLabel, this](int value) -> void {
-				this->outputWidget->getMandelbrot()->setIterations(value);
+				this->outputWidget->getMandelbrot().setIterations(value);
 				this->outputWidget->update();
 				iterationsLabel->setNum(value);
 			});

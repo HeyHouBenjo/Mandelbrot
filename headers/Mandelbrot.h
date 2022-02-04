@@ -12,6 +12,7 @@ public:
 	void setIterations(int);
 	void translateRelative(QVector2D);
 	void zoomRelative(int, QVector2D);
+	void resizeRelative(QVector2D);
 private:
 	int iterations = 0;
 	QVector2D origin {-2, -1};

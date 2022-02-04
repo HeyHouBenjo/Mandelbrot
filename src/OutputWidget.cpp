@@ -7,7 +7,7 @@ using std::cout, std::endl;
 void OutputWidget::initializeGL() {
 	cout << "Initialize OpenGL" << endl;
 	initializeOpenGLFunctions();
-	getMandelbrot()->init();
+	getMandelbrot().init();
 	initShader();
 
 	auto format = this->format();
@@ -19,11 +19,7 @@ void OutputWidget::initializeGL() {
 }
 
 void OutputWidget::paintGL() {
-	getMandelbrot()->draw(vao, shader);
-}
-
-void OutputWidget::resizeGL(int w, int h) {
-
+	getMandelbrot().draw(vao, shader);
 }
 
 GLuint OutputWidget::createVAO() {
@@ -64,19 +60,35 @@ void OutputWidget::initShader() {
 	if (!shader.bind()) close();
 }
 
-QVector2D relative(QPoint p, QSize s){
+
+QVector2D divide(QPoint p, QSize s){
 	return {
 			float(p.x()) / float(s.width()),
 			float(p.y()) / float(s.height())
 	};
 }
+QVector2D divide(QSize s1, QSize s2){
+	return divide(QPoint(s1.width(), s1.height()), s2);
+}
+
+void OutputWidget::resizeGL(int w, int h) {
+	QSize newSize = QSize(w, h);
+	if (oldSize == QSize(0, 0)){
+		oldSize = newSize;
+		return;
+	}
+	QSize diff = oldSize - newSize;
+	QVector2D relative = QVector2D(1, 1) - divide(diff, oldSize);
+	getMandelbrot().resizeRelative(relative);
+	oldSize = newSize;
+}
 
 void OutputWidget::wheelEvent(QWheelEvent *e) {
 	QPoint pos = e->position().toPoint();
 	int direction = e->angleDelta().y() > 0 ? 1 : -1;
-	QVector2D relativePos = relative(pos, size());
+	QVector2D relativePos = divide(pos, size());
 	relativePos.setY(1 - relativePos.y());
-	getMandelbrot()->zoomRelative(direction, relativePos);
+	getMandelbrot().zoomRelative(direction, relativePos);
 	update();
 }
 
@@ -84,9 +96,9 @@ void OutputWidget::mouseMoveEvent(QMouseEvent *e) {
 	QPoint newMousePos = e->pos();
 	QPoint diff = newMousePos - mousePos;
 	mousePos = newMousePos;
-	QVector2D relativeDiff = relative(diff, size());
+	QVector2D relativeDiff = divide(diff, size());
 	relativeDiff.setY(-relativeDiff.y());
-	getMandelbrot()->translateRelative(relativeDiff);
+	getMandelbrot().translateRelative(relativeDiff);
 	update();
 }
 

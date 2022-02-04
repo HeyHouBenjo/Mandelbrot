@@ -37,6 +37,10 @@ void Mandelbrot::translateRelative(QVector2D relative) {
 	origin -= absolute;
 }
 
+void Mandelbrot::resizeRelative(QVector2D relative) {
+	size *= relative;
+}
+
 
 
 
