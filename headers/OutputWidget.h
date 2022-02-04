@@ -29,8 +29,7 @@ private:
 	void initShader();
 	static std::vector<QVector2D> genVertices();
 	GLuint createVAO();
-	GLuint vao;
-	int vertCount;
+	GLuint vao{};
 	QOpenGLShaderProgram shader;
 
 	Mandelbrot mandelbrot;

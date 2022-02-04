@@ -23,7 +23,7 @@ void OutputWidget::paintGL() {
 }
 
 void OutputWidget::resizeGL(int w, int h) {
-	
+
 }
 
 GLuint OutputWidget::createVAO() {
@@ -33,7 +33,6 @@ GLuint OutputWidget::createVAO() {
 
 	auto vertices = genVertices();
 	size_t size = vertices.size() * sizeof(QVector2D);
-	vertCount = int(vertices.size());
 	glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)size, &vertices[0], GL_STATIC_DRAW);
 
 	GLuint vaoId;
@@ -41,7 +40,7 @@ GLuint OutputWidget::createVAO() {
 	glBindVertexArray(vaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(QVector2D), (GLvoid const*) 0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(QVector2D), (void*) nullptr);
 	glEnableVertexAttribArray(0);
 
 	glBindVertexArray(0);
@@ -72,6 +71,7 @@ void OutputWidget::wheelEvent(QWheelEvent *e) {
 void OutputWidget::mouseMoveEvent(QMouseEvent *e) {
 	QPoint newMousePos = e->pos();
 	QPoint diff = newMousePos - mousePos;
+	auto m = getMandelbrot();
 }
 
 void OutputWidget::mousePressEvent(QMouseEvent *e) {
