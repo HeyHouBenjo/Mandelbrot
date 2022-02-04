@@ -14,17 +14,22 @@ void Mandelbrot::draw(GLuint vao, QOpenGLShaderProgram& shader) {
 }
 
 void Mandelbrot::setShaderValues(QOpenGLShaderProgram &shader) const {
-	shader.setUniformValue("origin", QVector2D(-2, 1));
-	shader.setUniformValue("size", QVector2D(2, 2));
+	shader.setUniformValue("origin", origin);
+	shader.setUniformValue("size", size);
 	shader.setUniformValue("iterationCount", iterations);
 }
 
-void Mandelbrot::zoom(double delta) {
-	scale *= delta;
+void Mandelbrot::zoomRelative(double delta, QVector2D posRelative) {
+
 }
 
 void Mandelbrot::setIterations(int value) {
 	iterations = value;
+}
+
+void Mandelbrot::translateRelative(QVector2D relative) {
+	QVector2D absolute = relative * size;
+	origin -= absolute;
 }
 
 

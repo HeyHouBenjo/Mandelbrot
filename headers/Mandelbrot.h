@@ -9,13 +9,13 @@ Q_OBJECT
 public:
 	void init();
 	void draw(GLuint, QOpenGLShaderProgram&);
-	void zoom(double);
-public slots:
 	void setIterations(int);
+	void translateRelative(QVector2D);
+	void zoomRelative(double, QVector2D);
 private:
 	int iterations = 0;
-	double scale = 1;
-	QVector2D translation;
+	QVector2D origin {-2, 1};
+	QVector2D size {2, 2};
 	void setShaderValues(QOpenGLShaderProgram&) const;
 };
 

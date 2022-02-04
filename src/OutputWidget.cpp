@@ -64,18 +64,33 @@ void OutputWidget::initShader() {
 	if (!shader.bind()) close();
 }
 
-void OutputWidget::wheelEvent(QWheelEvent *e) {
+QVector2D relative(QPoint p, QSize s){
+	return {
+			float(p.x()) / float(s.width()),
+			float(p.y()) / float(s.height())
+	};
+}
 
+void OutputWidget::wheelEvent(QWheelEvent *e) {
+	double modifier = 1;
+	if (e->angleDelta().y() > 0)
+		modifier *= 1.1;
+	else
+		modifier /= 1.1;
+	getMandelbrot()->zoomRelative(modifier, relative(mousePos, size()));
+	update();
 }
 
 void OutputWidget::mouseMoveEvent(QMouseEvent *e) {
 	QPoint newMousePos = e->pos();
 	QPoint diff = newMousePos - mousePos;
-	auto m = getMandelbrot();
+	mousePos = newMousePos;
+	getMandelbrot()->translateRelative(relative(diff, size()));
+	update();
 }
 
 void OutputWidget::mousePressEvent(QMouseEvent *e) {
-
+	mousePos = e->pos();
 }
 
 void OutputWidget::mouseReleaseEvent(QMouseEvent *e) {
