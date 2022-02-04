@@ -4,7 +4,7 @@
 #include <iostream>
 #include "../headers/MainWindow.h"
 
-MainWindow::MainWindow() {
+MainWindow::MainWindow(): outputWidget(OutputWidget(this)) {
 	buildUI();
 }
 
@@ -22,8 +22,8 @@ void MainWindow::buildUI() {
 			&QSlider::valueChanged,
 			this,
 			[iterationsLabel, this](int value) -> void {
-				this->outputWidget->getMandelbrot().setIterations(value);
-				this->outputWidget->update();
+				this->outputWidget.getMandelbrot().setIterations(value);
+				this->outputWidget.update();
 				iterationsLabel->setNum(value);
 			});
 	iterationsSlider->setValue(100);
@@ -34,6 +34,6 @@ void MainWindow::buildUI() {
 	controls->addWidget(iterationsSlider, 1, 3);
 
 	auto lyt = new QVBoxLayout(this);
-	lyt->addWidget(outputWidget);
+	lyt->addWidget(&outputWidget);
 	lyt->addLayout(controls);
 }

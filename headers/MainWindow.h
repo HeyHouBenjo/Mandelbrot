@@ -9,7 +9,7 @@ public:
 	explicit MainWindow();
 private:
 	void buildUI();
-	OutputWidget* outputWidget = new OutputWidget(this);
+	OutputWidget outputWidget;
 };
 
 
