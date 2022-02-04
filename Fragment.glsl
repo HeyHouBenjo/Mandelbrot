@@ -6,8 +6,6 @@ uniform int iterationCount;
 in vec2 complexPos;
 
 vec3 hsvToRgb(in float h, in float s, in float v){
-    if (h >= 360)
-        h -= 360;
     float c = v * s;
     float x = c * (1 - abs(mod(h / 60, 2) - 1));
     float m = v - c;
@@ -29,11 +27,9 @@ vec3 hsvToRgb(in float h, in float s, in float v){
 }
 
 vec3 getColor(in float modifier){
-    float value = 1;
-    if (modifier >= 1)
-        value = 0;
     float hue = modifier * 360;
     float sat = 1;
+    float value = modifier == 0 ? 0 : 1;
 
     return hsvToRgb(hue, sat, value);
 }
@@ -46,16 +42,23 @@ vec2 m(in vec2 c){
     return square(c) + complexPos;
 }
 
-void main(){
-
+int mandelbrot(in vec2 c){
     vec2 z = vec2(0, 0);
     int steps = 0;
     while (steps < iterationCount && length(z) <= 2){
         z = m(z);
         ++steps;
     }
+    if (steps == iterationCount)
+        return 0;
+    return steps;
+}
 
-    float modifier = sqrt(float(steps) / iterationCount);
+void main(){
+
+    int m = mandelbrot(complexPos);
+
+    float modifier = sqrt(float(m) / iterationCount);
     pixColor = vec4(getColor(modifier), 1);
 }
 
