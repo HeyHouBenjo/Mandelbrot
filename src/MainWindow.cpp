@@ -46,12 +46,22 @@ void MainWindow::buildUI() {
 				});
 			});
 
+	auto animButton = new QPushButton("Toggle animation");
+	connect(
+			animButton,
+			&QPushButton::clicked,
+			this,
+			[this](){
+				this->outputWidget.getMandelbrot().toggleAnimation();
+			});
+
 	auto controls = new QGridLayout;
 	controls->addWidget(iterationsCaption, 1, 1);
 	controls->addWidget(iterationsLabel, 1, 2);
 	controls->addWidget(iterationsSlider, 1, 3);
 	controls->addWidget(saveInfo, 2, 1, 1, 2);
 	controls->addWidget(saveButton, 2, 3, 1, 1);
+	controls->addWidget(animButton, 3, 1, 1, 3);
 
 	auto lyt = new QVBoxLayout(this);
 	lyt->addWidget(&outputWidget);

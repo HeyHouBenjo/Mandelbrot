@@ -5,7 +5,9 @@
 #include <QOpenGLFramebufferObject>
 #include <QFileDialog>
 #include <utility>
+#include <QTimer>
 #include "../headers/OutputWidget.h"
+#include <QTimer>
 
 using std::cout, std::endl;
 
@@ -19,6 +21,14 @@ void OutputWidget::initializeGL() {
 	cout << "OpenGL version: " << format.majorVersion() << "." << format.minorVersion() << endl;
 
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+
+	auto timer = new QTimer(this);
+	timer->setInterval(17);
+	timer->start();
+	connect(timer, &QTimer::timeout, this, [this](){
+		this->getMandelbrot().updateAnimation();
+		update();
+	});
 }
 
 void OutputWidget::paintGL() {
@@ -86,7 +96,6 @@ void OutputWidget::wheelEvent(QWheelEvent *e) {
 	QVector2D relativePos = divide(pos, size());
 	relativePos.setY(1 - relativePos.y());
 	getMandelbrot().zoomRelative(direction, relativePos);
-	update();
 }
 
 void OutputWidget::mouseMoveEvent(QMouseEvent *e) {
@@ -96,7 +105,6 @@ void OutputWidget::mouseMoveEvent(QMouseEvent *e) {
 	QVector2D relativeDiff = divide(diff, size());
 	relativeDiff.setY(-relativeDiff.y());
 	getMandelbrot().translateRelative(relativeDiff);
-	update();
 }
 
 void OutputWidget::mousePressEvent(QMouseEvent *e) {

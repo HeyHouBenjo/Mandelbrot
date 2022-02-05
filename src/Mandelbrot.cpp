@@ -17,6 +17,17 @@ void Mandelbrot::draw() {
 	glBindVertexArray(0);
 }
 
+void Mandelbrot::updateAnimation() {
+	if (!animating)
+		return;
+	hueAdd += 1;
+	hueAdd -= hueAdd >= 360 ? 360 : 0;
+}
+
+void Mandelbrot::toggleAnimation() {
+	animating = !animating;
+}
+
 bool Mandelbrot::initShader() {
 	if (!shader.addShaderFromSourceFile(QOpenGLShader::Vertex, "Vertex.glsl")) return false;
 	if (!shader.addShaderFromSourceFile(QOpenGLShader::Fragment, "Fragment.glsl")) return false;
@@ -29,6 +40,7 @@ void Mandelbrot::setShaderValues() {
 	shader.setUniformValue("origin", origin);
 	shader.setUniformValue("size", size);
 	shader.setUniformValue("iterationCount", iterations);
+	shader.setUniformValue("hueAdd", hueAdd);
 }
 
 void Mandelbrot::zoomRelative(int direction, QVector2D posRelative) {
