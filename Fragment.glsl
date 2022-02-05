@@ -42,23 +42,24 @@ vec2 m(in vec2 c){
     return square(c) + complexPos;
 }
 
-int mandelbrot(in vec2 c){
+float mandelbrot(in vec2 c){
     vec2 z = vec2(0, 0);
-    int steps = 0;
-    while (steps < iterationCount && length(z) <= 2){
+    float steps = 0;
+    int escapeSquared = pow(1 << 8, 2);
+    while (steps < iterationCount && pow(z.x, 2) + pow(z.y, 2) < escapeSquared){
         z = m(z);
         ++steps;
     }
     if (steps == iterationCount)
-        return 0;
-    return steps;
+        return 0.;
+    float log_zn = log(z.x * z.x + z.y * z.y) / 2;
+    float nu = log(log_zn / log(2)) / log(2);
+    steps += 1 - nu;
+    return steps / iterationCount;
 }
 
 void main(){
-
-    int m = mandelbrot(complexPos);
-
-    float modifier = sqrt(float(m) / iterationCount);
+    float modifier = mandelbrot(complexPos);
     pixColor = vec4(getColor(modifier), 1);
 }
 
