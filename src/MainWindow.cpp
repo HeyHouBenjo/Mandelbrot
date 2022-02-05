@@ -12,22 +12,22 @@ MainWindow::MainWindow(): outputWidget(OutputWidget(this)) {
 void MainWindow::buildUI() {
 	resize(700, 700);
 
-	auto iterationsCaption = new QLabel("Iteration count: ");
-	auto iterationsLabel = new QLabel;
-	iterationsLabel->setFixedWidth(50);
-	iterationsLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
-	auto iterationsSlider = new QSlider(Qt::Horizontal);
-	iterationsSlider->setRange(5, 1000);
+	auto maxIterationsCaption = new QLabel("Max iteration count: ");
+	auto maxIterationsLabel = new QLabel;
+	maxIterationsLabel->setFixedWidth(50);
+	maxIterationsLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+	auto maxIterationsSlider = new QSlider(Qt::Horizontal);
+	maxIterationsSlider->setRange(5, 1000);
 	connect(
-			iterationsSlider,
+			maxIterationsSlider,
 			&QSlider::valueChanged,
 			this,
-			[iterationsLabel, this](int value) -> void {
-				this->outputWidget.getMandelbrot().setIterations(value);
+			[maxIterationsLabel, this](int value) -> void {
+				this->outputWidget.getMandelbrot().setMaxIterations(value);
 				this->outputWidget.update();
-				iterationsLabel->setNum(value);
+				maxIterationsLabel->setNum(value);
 			});
-	iterationsSlider->setValue(100);
+	maxIterationsSlider->setValue(100);
 
 	auto saveInfo = new QLabel;
 	auto saveButton = new QPushButton("Save high resolution image");
@@ -56,9 +56,9 @@ void MainWindow::buildUI() {
 			});
 
 	auto controls = new QGridLayout;
-	controls->addWidget(iterationsCaption, 1, 1);
-	controls->addWidget(iterationsLabel, 1, 2);
-	controls->addWidget(iterationsSlider, 1, 3);
+	controls->addWidget(maxIterationsCaption, 1, 1);
+	controls->addWidget(maxIterationsLabel, 1, 2);
+	controls->addWidget(maxIterationsSlider, 1, 3);
 	controls->addWidget(saveInfo, 2, 1, 1, 2);
 	controls->addWidget(saveButton, 2, 3, 1, 1);
 	controls->addWidget(animButton, 3, 1, 1, 3);

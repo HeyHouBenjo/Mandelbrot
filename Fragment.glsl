@@ -1,7 +1,7 @@
 #version 330 core
 out vec4 pixColor;
 
-uniform int iterationCount;
+uniform int maxIterationsCount;
 uniform float hueAdd;
 
 in vec2 complexPos;
@@ -47,16 +47,16 @@ float mandelbrot(in vec2 c){
     vec2 z = vec2(0, 0);
     float steps = 0;
     float escapeSquared = pow(1 << 8, 2);
-    while (steps < iterationCount && pow(z.x, 2) + pow(z.y, 2) < escapeSquared){
+    while (steps < maxIterationsCount && pow(z.x, 2) + pow(z.y, 2) < escapeSquared){
         z = m(z);
         ++steps;
     }
-    if (steps == iterationCount)
+    if (steps == maxIterationsCount)
         return 0.;
     float log_zn = log(z.x * z.x + z.y * z.y) / 2;
     float nu = log(log_zn / log(2)) / log(2);
     steps += 1 - nu;
-    float t = steps / iterationCount;
+    float t = steps / maxIterationsCount;
     return sqrt(t);
 }
 

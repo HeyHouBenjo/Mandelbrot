@@ -39,7 +39,7 @@ bool Mandelbrot::initShader() {
 void Mandelbrot::setShaderValues() {
 	shader.setUniformValue("origin", origin);
 	shader.setUniformValue("size", size);
-	shader.setUniformValue("iterationCount", iterations);
+	shader.setUniformValue("maxIterationsCount", maxIterations);
 	shader.setUniformValue("hueAdd", hueAdd);
 }
 
@@ -52,8 +52,8 @@ void Mandelbrot::zoomRelative(int direction, QVector2D posRelative) {
 	origin = newOrigin;
 }
 
-void Mandelbrot::setIterations(int value) {
-	iterations = value;
+void Mandelbrot::setMaxIterations(int value) {
+	maxIterations = value;
 }
 
 void Mandelbrot::translateRelative(QVector2D relative) {
