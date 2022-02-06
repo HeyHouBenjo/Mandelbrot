@@ -10,12 +10,13 @@ public:
 	void init(GLuint);
 	void draw();
 	void updateAnimation();
-	void toggleAnimation();
 	void setMaxIterations(int);
 	void translateRelative(QVector2D);
 	void zoomRelative(int, QVector2D);
 	void resizeRelative(QVector2D);
 	bool initShader();
+public slots:
+	void toggleAnimation();
 private:
 	int maxIterations = 0;
 	float hueAdd = 0;

@@ -50,10 +50,8 @@ void MainWindow::buildUI() {
 	connect(
 			animButton,
 			&QPushButton::clicked,
-			this,
-			[this](){
-				this->outputWidget.getMandelbrot().toggleAnimation();
-			});
+			&outputWidget.getMandelbrot(),
+			&Mandelbrot::toggleAnimation);
 
 	auto controls = new QGridLayout;
 	controls->addWidget(maxIterationsCaption, 1, 1);
