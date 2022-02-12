@@ -41,6 +41,7 @@ void Mandelbrot::setShaderValues() {
 	shader.setUniformValue("size", size);
 	shader.setUniformValue("maxIterationsCount", maxIterations);
 	shader.setUniformValue("hueAdd", hueAdd);
+	shader.setUniformValue("normalize", normalize);
 }
 
 void Mandelbrot::zoomRelative(int direction, QVector2D posRelative) {
@@ -63,6 +64,10 @@ void Mandelbrot::translateRelative(QVector2D relative) {
 
 void Mandelbrot::resizeRelative(QVector2D relative) {
 	size *= relative;
+}
+
+void Mandelbrot::toggleNormalize() {
+	normalize = !normalize;
 }
 
 

@@ -17,12 +17,14 @@ public:
 	bool initShader();
 public slots:
 	void toggleAnimation();
+	void toggleNormalize();
 private:
 	int maxIterations = 0;
 	float hueAdd = 0;
 	QVector2D origin {-2, -1};
 	QVector2D size {2, 2};
 	float zoomModifier = 1.05;
+	bool normalize = true;
 
 	bool animating = true;
 

@@ -3,6 +3,7 @@ out vec4 pixColor;
 
 uniform int maxIterationsCount;
 uniform float hueAdd;
+uniform bool normalize;
 
 in vec2 complexPos;
 
@@ -53,9 +54,11 @@ float mandelbrot(in vec2 c){
     }
     if (steps == maxIterationsCount)
         return 0.;
-    float log_zn = log(z.x * z.x + z.y * z.y) / 2;
-    float nu = log(log_zn / log(2.)) / log(2.);
-    steps += 1 - nu;
+    if (normalize){
+        float log_zn = log(z.x * z.x + z.y * z.y) / 2;
+        float nu = log(log_zn / log(2.)) / log(2.);
+        steps += 1 - nu;
+    }
     float t = steps / maxIterationsCount;
     return sqrt(t);
 }

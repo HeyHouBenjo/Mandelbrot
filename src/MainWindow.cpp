@@ -53,6 +53,12 @@ void MainWindow::buildUI() {
 			&outputWidget.getMandelbrot(),
 			&Mandelbrot::toggleAnimation);
 
+	auto normButton = new QPushButton("Toggle normalization");
+	connect(normButton,
+			&QPushButton::clicked,
+			&outputWidget.getMandelbrot(),
+			&Mandelbrot::toggleNormalize);
+
 	auto controls = new QGridLayout;
 	controls->addWidget(maxIterationsCaption, 1, 1);
 	controls->addWidget(maxIterationsLabel, 1, 2);
@@ -60,6 +66,7 @@ void MainWindow::buildUI() {
 	controls->addWidget(saveInfo, 2, 1, 1, 2);
 	controls->addWidget(saveButton, 2, 3, 1, 1);
 	controls->addWidget(animButton, 3, 1, 1, 3);
+	controls->addWidget(normButton, 4, 1, 1, 3);
 
 	auto lyt = new QVBoxLayout(this);
 	lyt->addWidget(&outputWidget);
