@@ -82,6 +82,7 @@ void OutputWidget::resizeGL(int w, int h) {
 	QSize newSize = QSize(w, h);
 	if (oldSize == QSize(0, 0)){
 		oldSize = newSize;
+		getMandelbrot().initView(newSize);
 		return;
 	}
 	QSize diff = oldSize - newSize;

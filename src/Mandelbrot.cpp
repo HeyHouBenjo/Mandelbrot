@@ -70,6 +70,19 @@ void Mandelbrot::toggleNormalize() {
 	normalize = !normalize;
 }
 
+void Mandelbrot::initView(QSize startSize) {
+	int viewW = startSize.width();
+	int viewH = startSize.height();
+	float ratio = float(viewW) / float(viewH);
+
+	if (ratio > 1){
+		size = {startMaxSize, startMaxSize / ratio};
+	} else {
+		size = {startMaxSize * ratio, startMaxSize};
+	}
+	origin = startCenter - size / 2;
+}
+
 
 
 
