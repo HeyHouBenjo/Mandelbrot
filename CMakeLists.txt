@@ -17,7 +17,7 @@ find_package(Qt6 COMPONENTS
 
 file(GLOB_RECURSE SOURCE_FILES src/**.cpp)
 file(GLOB_RECURSE HEADER_FILES headers/**.h)
-add_executable(Mandelbrot ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(Mandelbrot ${SOURCE_FILES} ${HEADER_FILES} shaders.qrc)
 
 target_link_libraries(Mandelbrot
         Qt::Core

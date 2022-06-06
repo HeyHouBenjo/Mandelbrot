@@ -29,8 +29,8 @@ void Mandelbrot::toggleAnimation() {
 }
 
 bool Mandelbrot::initShader() {
-	if (!shader.addShaderFromSourceFile(QOpenGLShader::Vertex, "Vertex.glsl")) return false;
-	if (!shader.addShaderFromSourceFile(QOpenGLShader::Fragment, "Fragment.glsl")) return false;
+	if (!shader.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Vertex.glsl")) return false;
+	if (!shader.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Fragment.glsl")) return false;
 	if (!shader.link()) return false;
 	if (!shader.bind()) return false;
 	return true;
