@@ -6,20 +6,10 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 COMPONENTS
-        Core
-        Gui
-        Widgets
-        OpenGLWidgets
-        REQUIRED)
+find_package(Qt6 COMPONENTS OpenGLWidgets REQUIRED)
 
 file(GLOB_RECURSE SOURCE_FILES src/**.cpp)
 file(GLOB_RECURSE HEADER_FILES headers/**.h)
 add_executable(Mandelbrot ${SOURCE_FILES} ${HEADER_FILES} shaders.qrc)
 
-target_link_libraries(Mandelbrot
-        Qt::Core
-        Qt::Gui
-        Qt::Widgets
-        Qt::OpenGLWidgets
-        )
+target_link_libraries(Mandelbrot Qt::OpenGLWidgets)
